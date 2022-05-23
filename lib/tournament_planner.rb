@@ -7,7 +7,7 @@ require_relative 'game_tournament'
 class TournamentPlanner
   def initialize(players, games)
     @players = players
-    @games = games
+    @games = games.sort_by(&:priority).reverse
     @game_tournaments = []
   end
 
