@@ -10,4 +10,14 @@ class GameTournament
     @game = game
     @players = players
   end
+
+  def enough_players?
+    @players.count >= 2
+  end
+
+  def to_s
+    players_str = ''
+    @players.each { |player| players_str += "\n#{player.name}" }
+    "Game: #{@game.name} \nPlayers:" + players_str
+  end
 end

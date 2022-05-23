@@ -29,4 +29,4 @@ players = [
 tournament = TournamentPlanner.new(players, games)
 
 tournament.plan_tournament
-players.each { |player| puts player }
+tournament.print_game_tournaments

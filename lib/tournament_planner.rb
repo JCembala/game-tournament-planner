@@ -17,4 +17,12 @@ class TournamentPlanner
       @game_tournaments << GameTournament.new(game, @players)
     end
   end
+
+  def print_game_tournaments
+    @game_tournaments.each { |tournament| puts tournament if tournament.enough_players? }
+  end
+
+  def excluded_games
+    # return excluded games
+  end
 end
