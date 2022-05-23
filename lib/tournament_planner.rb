@@ -12,9 +12,17 @@ class TournamentPlanner
   end
 
   def plan_tournament
+    taken_players = []
     @games.each do |game|
-      # Only players that will play this particular game?
-      @game_tournaments << GameTournament.new(game, @players)
+      # Only players that want to play this game
+      players_for_game = @players.select { |player| player.games.include? game }
+      # Removing players who are playing something else
+      players_for_game.delete_if { |player| taken_players.include? player }
+
+      players_for_game = players_for_game[0, game.max_player_count] if players_for_game.length > game.max_player_count
+
+      taken_players = (taken_players + players_for_game).uniq
+      @game_tournaments << GameTournament.new(game, players_for_game)
     end
   end
 
