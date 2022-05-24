@@ -19,5 +19,6 @@ The day will consist of multiple tournaments. However each game can only be play
 * Implement planning logic for `TournamentPlanner` taking into account the rules and constraints.
 * Prints out final game turnaments schedule (each row consists of Game name, list of player names). Consider implementing `#to_s` method of each class to simplify printing.
 * Also print out list of `Games` that were excluded (no one wanted to play them, they didn't have required amount of minimal players or their ranking was low and players were allocated to games with higher ranking)
+* Sort players by sign_up_at so first players will be chosen to play games
 
 Assignment from: https://github.com/Selleo/recruitment-exercises/blob/master/exercises/game_torunament_planner/game_torunament_planner.md
