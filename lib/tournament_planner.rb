@@ -6,28 +6,26 @@ require_relative 'game_tournament'
 # It have a list of players and games
 class TournamentPlanner
   def initialize(players, games)
-    @players = players
+    @players = players.sort_by(&:sign_up_at)
     @games = games.sort_by(&:priority).reverse
     @game_tournaments = []
-    @chosen_games = []
+    @excluded_games = []
   end
 
   def plan_tournament
-    taken_players = []
     @games.each do |game|
-      # Chosing players that want to play this game
-      players_for_game = @players.select { |player| player.games.include? game }
-      # Add game which players want to play
-      @chosen_games << game unless players_for_game.empty? || @chosen_games.include?(game)
-      # Removing players who are playing something else
-      players_for_game.delete_if { |player| taken_players.include? player }
+      players_for_current_game = []
+      @players.each do |player|
+        break if players_for_current_game.length >= game.max_player_count
 
-      players_for_game = players_for_game[0, game.max_player_count] if players_for_game.length > game.max_player_count
+        players_for_current_game << player if player.games.include? game
+      end
 
-      # Create only tournaments that has enough players to be played
-      if players_for_game.length >= 2
-        taken_players = (taken_players + players_for_game).uniq
-        @game_tournaments << GameTournament.new(game, players_for_game)
+      if players_for_current_game.length < 2
+        @excluded_games << game
+      else
+        players_for_current_game.each { |player| @players.delete player }
+        @game_tournaments << GameTournament.new(game, players_for_current_game)
       end
     end
   end
@@ -37,8 +35,6 @@ class TournamentPlanner
   end
 
   def print_excluded_games
-    excluded = @chosen_games.clone
-    @game_tournaments.each { |tournament| excluded.delete tournament.game }
-    puts excluded
+    puts @excluded_games
   end
 end
