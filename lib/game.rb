@@ -11,6 +11,6 @@ class Game
   end
 
   def to_s
-    "#{@name}\nPriority: #{@priority}\nMax player: #{@max_player_count}"
+    @name
   end
 end

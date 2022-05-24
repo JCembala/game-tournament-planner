@@ -17,7 +17,7 @@ class GameTournament
 
   def to_s
     players_str = ''
-    @players.each { |player| players_str += "\n#{player.name}" }
-    "Game: #{@game.name} \nPlayers:" + players_str
+    @players.each { |player| players_str += "#{player} " }
+    "Game: #{@game.name} \nPlayers: " + "#{players_str}\n\n"
   end
 end

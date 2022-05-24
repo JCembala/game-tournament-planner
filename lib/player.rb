@@ -11,4 +11,8 @@ class Player
     @games = games
     @sign_up_at = DateTime.now
   end
+
+  def to_s
+    @name
+  end
 end
