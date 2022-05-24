@@ -6,6 +6,8 @@ require_relative 'player'
 # Holds information about game tournament
 # Have a game, and list of players that will playing it that day
 class GameTournament
+  attr_reader :game
+
   def initialize(game, players)
     @game = game
     @players = players

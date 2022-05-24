@@ -33,4 +33,8 @@ players = [
 tournament = TournamentPlanner.new(players, games)
 
 tournament.plan_tournament
+puts
 tournament.print_game_tournaments
+
+puts 'Excluded games:'
+tournament.print_excluded_games
