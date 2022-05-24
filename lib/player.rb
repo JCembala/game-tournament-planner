@@ -4,12 +4,12 @@ require 'date'
 
 # Holds information about player
 class Player
-  attr_accessor :games, :name
+  attr_accessor :games, :name, :sign_up_at
 
   def initialize(name, games = [])
     @name = name
     @games = games
-    @sign_up_at = DateTime.now
+    @sign_up_at = Time.new + rand(1..1200)
   end
 
   def to_s
