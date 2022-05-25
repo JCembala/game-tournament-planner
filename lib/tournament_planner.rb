@@ -24,7 +24,7 @@ class TournamentPlanner
       if players_for_current_game.length < 2
         @excluded_games << game
       else
-        @players.delete_if { |player| players_for_current_game.include? player }
+        @players -= @players & players_for_current_game
         @game_tournaments << GameTournament.new(game, players_for_current_game)
       end
     end
